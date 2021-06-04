@@ -3,128 +3,158 @@
     * List at least two platforms and describe the key properties of each
 
 * Web platform:
-    * Briefly describe the underlying technologies supporting the Web platform
+    * Briefly describe the underlying technologies supporting the Web platform  
         HTML (hyper text mark up language) is a markup language for hyper text, which is a text that points to another resource 
         HTTP -> is a client-server communication protocol where client sends the request and server responds with response. It has multiple methods: GET, POST, PUT, DELETE...
         URL -> is a unified way of referencing resources on the web 
-    * What is Hypertext? Briefly describe its historical role in the Web.
+    * What is Hypertext? Briefly describe its historical role in the Web.  
         Hyper text is text that a points to another resource.
         It got invented in the 1963 and by 1968 there were already exmaple usages of hyper text on local file storage systems. In 1989 Tim Berners Lee connected hyper text with url and http and with that created the www 
-    * What is WWW? List its main components.
+    * What is WWW? List its main components.  
         WWW is a service which runs on the internet. Main components already listed above
-    * Describe the functioning of HTTP.
+    * Describe the functioning of HTTP.  
         Http is a client-server communication protocol, thus the client sends the request with certain http method and the server responds once it processes the request. After that the http connection is closed
-    * What does HTTP response code 200 mean?
+    * What does HTTP response code 200 mean?  
         It means OK (Successful request)
-    * Explain the difference between a single-tier and a multi-tier Web architecture
+    * Explain the difference between a single-tier and a multi-tier Web architecture  
         Single tier -> presentation, logic and data are all in a single program
         Multi tier -> different layers for presentation, logic and data. This allows for easier scalability and upgradeability of layers
-    * List main functionalities of each: Presentation layer, Application/Business layer, Data layer in a multi-tier Web architecture.
+    * List main functionalities of each: Presentation layer, Application/Business layer, Data layer in a multi-tier Web architecture.  
         Presentation layer -> deals with UI. It presents the data and handles user events
         Buisness layer -> it processes requests, fetches the data and with that connects the data and presentation layer
         Data layer -> deals with storing and the structure of the data. 
-    * In his 1996 article, Tim Berners Lee expresses a concern that the Web looks like a lot of television channels. Explain what he means by this? In your opinion, is the Internet today still “a lot of television channels”? Defend your argument.
-        He meant by this that every page stated that it works best with certain version of a certain browser. I don't think this is the case today since all of the browsers follow the standards posted by W3C and most of the world uses a chromium based browser anyway. There are ofcourse small discrepencies between different browsers but they are not noticeable for the average user, since they are mostly found in nitche application
-    * Changing URLs were a problem in the early Web. How is it solved nowadays?
+    * In his 1996 article, Tim Berners Lee expresses a concern that the Web looks like a lot of television channels. Explain what he means by this? In your opinion, is the Internet today still “a lot of television channels”? Defend your argument.  
+        He meant by this that every page stated that it works best with certain version of a certain browser. I don't think this is the case today since all of the browsers follow the standards posted by W3C and most of the world uses a chromium based browser anyway. There are of course small discrepencies between different browsers but they are not noticeable for the average user, since they are mostly found in nitche applications
+    * Changing URLs were a problem in the early Web. How is it solved nowadays?  
         It is solved with redirects. Http 301 states that resource has been permanently moved to another location, thus the redirect happens
-    * What are content-delivery networks? How do they help with the network load?
-    * Explain how AJAX web pages work.
+    * What are content-delivery networks? How do they help with the network load?  
+    * Explain how AJAX web pages work.  
         AJAX webpages are webpages which make AJAX requests, i.e they send asynchrounus requests to the server. This is why they are more interactive since the webpage does not need to be reloaded everytime a user interacts with the page 
     * What is Information-centric networking?
-    * What is REST? List its main rules?
+    * What is REST? List its main rules?  
         Rest (Representational state transfer) is a software architecture style used for writing web services
-        Rules:
-            - stateless
-            - cacheable
-            - uniform interface
-            - client-server (black boxes to eachother)
-            - layered system
-    * Describe constraints of REST and MEAN.
+        Rules:  
+        - stateless
+        - cacheable
+        - uniform interface
+        - client-server (black boxes to eachother)
+        - layered system
+    * Describe constraints of REST and MEAN.  
         Rest:
-            - stateless (client needs to send the context with each request)
-            - weak security
+        - stateless (client needs to send the context with each request)
+        - weak security
         MEAN:
-            - Does not use rleational databases which some projects require
-    * Why does TCP work poorly over slow links (such as satellites)?
+        - Does not use rleational databases which some projects require
+    * Why does TCP work poorly over slow links (such as satellites)?  
         Because TCP waits for confirmation after it sends data. Since the satellites are far away that confirmation can take longer to come than the defined TCP timeout, because of that the requests can fail.
-    * Why is HTTP often not used for low-resource devices in the Internet of Things?
+    * Why is HTTP often not used for low-resource devices in the Internet of Things?  
         Because http connections use additional resources compared to other alternatives (such as mqtt, lora...). They keep the connection open for longer since the client needs to wait for the response, which uses more battery 
 
 * Mobile platform:
-    * List at least four applications of mobile computing technology (note: don’t list specific applications, but application areas)
+    * List at least four applications of mobile computing technology (note: don’t list specific applications, but application areas)  
         - Productivity applications (Todoist, Planner, Keep...)
         - Games (Candy crush, clash of clans...)
         - Workout trackers (S Health, Google fit, )
         - Messeging apps (Messenger, Viber, WhatsApp...)
-    * Present some arguments about why you think that Symbian operating system failed to reach the popularity of Android or iOS.
+    * Present some arguments about why you think that Symbian operating system failed to reach the popularity of Android or iOS.  
         - it wasn't optimized for capacitive touchscreens
         - it didn't have an appstore 
         - bad developing experience (for developers)
-    * What is Android? (max 3 sentences)
+    * What is Android? (max 3 sentences)  
         Android is an open source, Linux based, mobile operating system from Google. 
-    * What are the key affordances of the mobile platform?
+    * What are the key affordances of the mobile platform?  
         - lot of user interactions
         - personalized devices 
 
-    * What are the main constraints of the mobile platform?
+    * What are the main constraints of the mobile platform?  
         - limited energy
         - limited processing power, limited resources are shared among apps, and background processing is limited in order preserve energy
         - wireless connection (is not always perfect or available at all)
         - security risks (people can lose their phones)
         - uniform user experience (due to large amount of different devices)
         - inaccurate sensors due to compact shape of devices and energy savings 
-    * What should we be careful about when designing user interaction for a mobile application?
+    * What should we be careful about when designing user interaction for a mobile application?  
         The Ui shouldn't contain really small elements, since the devices are small and have touch screens. The app should also use standard gestures if possible as the users don't want to learn different gestures for every app. 
-    * Discuss ability to troubleshoot and upgrade software built and deployed in: 1) Android phones; 2) microwave ovens.
+    * Discuss ability to troubleshoot and upgrade software built and deployed in: 1) Android phones; 2) microwave ovens.  
         Android phones -- Android sutdio provides the ability to stop the program at a wanted line and observe the in memory data. Apps can be upgraded over the air with google play or other appstores
-        Microwave oven -- ussualy do not have software for debugging and upgrades once deployed are impossible
+        Microwave oven -- ussually do not have software for debugging and upgrades are impossible after the product has already been deployed.
 
 * Embedded platform:
-    * List at least four applications of embedded computing technology (note: don’t list specific applications, but application areas)
+    * List at least four applications of embedded computing technology (note: don’t list specific applications, but application areas)  
         - agriculture
         - IoT
         - Weapons
         - Space exploration
-    * What are the key properties of embedded systems?
+    * What are the key properties of embedded systems?  
         They tend to be specifically designed systems for a single task or operation. They are very efficient in what they do. They are programmed in low level programming languages to improve performance. Ussualy they are also resource constrained. 
-    * What is a sensor?
-        Sensor is a device which reads phisical properties from enviroment and converts it electrical signal
-    * What is an actuator?
+    * What is a sensor?  
+        Sensor is a device which reads physical properties from enviroment and converts it to electrical signal
+    * What is an actuator?  
         It is a device which interacts/affects the enviroment. Usually it is driven by signals from embedded system and requires additional power for running (Not all of the time)
-    * List at least two programming languages used for embedded programming.
+    * List at least two programming languages used for embedded programming.  
         C++, C, Assembler
-    * Why do we use low-level programming languages for embedded programming?
+    * Why do we use low-level programming languages for embedded programming?  
         They improve performance and allow developers to manage memory.
-    * What is a real-time operating system?
+    * What is a real-time operating system?  
         System which processes the events/requests in real time, there is no buffer delay.
-    * What is an interrupt routine in embedded programming?
+    * What is an interrupt routine in embedded programming?  
         It is a process of switching current running process with the interrupt program and than returning back the process (which was previously running) along with its context
     * What are the main constraints of embedded networked systems discussed in Estrin et al. article?
-    * A vehicle often contains (at least two) independent embedded systems. Why?
-        They tend to have embedded systems for safety critical systems such as ABS breaking. They need to work 100% of the time and they need to respond ASAP. That is why they are seperatly developed and put in a car. On the other hand we have systems which deal with non safety critical functions such as operating radio from the stearing wheel buttons. 
+    * A vehicle often contains (at least two) independent embedded systems. Why?  
+        They tend to have embedded systems for safety critical systems such as ABS breaking. They need to work 100% of the time and they need to respond ASAP. That is why they are seperatly developed and put in a car. On the other hand we have systems which deal with non safety critical functions such as operating radio from the stearing wheel buttons, this systems should not influence the safety critical ones, that is why they are seperated. 
     * What are the main threats for embedded systems’ wireless communication? Hint: Estrin et al. paper.
     * Why, even more so than with conventional desktop systems, we must ensure that embedded networked systems are correctly programmed?
     * “Failures we have in today’s technologies could be disastrous in embedded networked systems” warn Estrin et al. in 2001. Argue for or against this statement.
     * Discuss a potential use of embedded systems in precision agriculture.
-    * Present at least one means of saving energy in an embedded system that senses the humiditiy in the field and notifies about potential floods.
-    * Describe in one sentence each: IP Core, FPGA, and MCU.
-    * List key properties of a sensor that you should be aware of when deciding to use one in your system.
-    * Describe the basics of analogue-digital conversion (ADC).
-    * List different storage components often available in an MCU. List their properties.
-    * What is cross-compilation?
-    * What is a toolchain?
+    * Present at least one means of saving energy in an embedded system that senses the humiditiy in the field and notifies about potential floods.  
+        Since humidity doesn't change so fast, we can measure humidity every 10 minutes and notify user only if necessery. In the mean time embedded system can sleep
+    * Describe in one sentence each: IP Core, FPGA, and MCU.  
+        - IP Core (Intellectual property core) is a reusable unit of logic or unit of functionality (Network controllers, Video/Audio chip...)
+        - FPGA A reconfigurable integrated cuircat, which contains an array of programmable logic blocks.
+        - MCU is a scaled down microprocessor, which needs to be programmed and is connected to other components
+    * List key properties of a sensor that you should be aware of when deciding to use one in your system.  
+        - Type (Analog/Digital)
+        - Accuracy
+        - Sensing range
+        - Sensing interval
+    * Describe the basics of analogue-digital conversion (ADC).  
+        Analog signal, represented in voltage level, is converted to digital signal (by ADC) with n-bits. Because of limited number of bits, there will always a quantatization error 
+    * List different storage components often available in an MCU. List their properties.  
+        - Registers: extremly fast (ussualy can be accessed in under a clock cycle), very expensive, very small amount of storaga
+        - Register file : is a set of registers, still very fast and expensive, very few of them in a system
+        - Cache : fast, cheaper than registers but still expensive, larger memory cpacitiy than previous options
+        - Main memory: slow (compared to other mentioned options), inexpensive, much larger memeroy capacity than before mentioned options
+    * What is cross-compilation?  
+        It is a process of compiling a program for different system architecture than the one you are compiling on (cross-compiling code for Arduino)
+    * What is a toolchain?  
+        It is a set of tools required to perform certain software development task
     * What are the main differences between an embedded operting system and a conventional (desktop) operating system?
-    * What is a process? What are the process states? Draw a state transition diagram.
-    * Is Arduino a real-time OS?
-    * Describe the following terms: input pin, output pin
-    * What is the difference between analogue and digital input pin? Give an example use of an analogue input pin.
-    * What are the two basic functions of an Arduino sketch? Describe their use.
+    * What is a process? What are the process states? Draw a state transition diagram.  
+        Process is an abstraction encapsulating set of processing tasks:  
+        - Instructions
+        - Resources assigned to it
+        - Context --> processor state while the process is being executed
+        TODO add diagram RUNING --<> READY <-- BLOCKED
+
+    * Is Arduino a real-time OS?  
+        Arduino does not have an OS, it only has a bootloader which loads your programm at the start.
+    * Describe the following terms: input pin, output pin  
+        Input pin is used for reading voltage from sensors/actuators. It can be digital or analogue  
+        Output pin is a pin on which you can control the voltage level. If it is digital it can be high or low (on/off), if it's analog than you can state a specific voltage level
+    * What is the difference between analogue and digital input pin? Give an example use of an analogue input pin.  
+        Analog input pin is used to read analog signals from sensors, which are than converted to digital by ADC. Digital pins on the other hand can only read HIGH or LOW state of the pin.  
+        They are used for reading the state of certain device (or maybe even sensor), which has only two states
+    * What are the two basic functions of an Arduino sketch? Describe their use.  
+        - setup() this function gets executed only once at the beginning of your programm and it is used for initialization (of variables, pins, serial communcation etc.)
+        - loop() this function runs in a loop (after setup() is completed) while the Arduino is powered on and here you implement the main logic of your program
 
 * Gaming platform:
-    * What is a Gaming engine?
-    * What is a GPU?
-        Graphics processing unit, is a special processor designed for graphicly intensive operations (such as floating point computations) operations
-
+    * What is a Gaming engine?  
+        Is a piece of software which is used for game development. It often comes with already implemented physics and objects which can be directly put into game scenes
+    * What is a GPU?  
+        A graphics processing unit is a specialized electronic circuit designed to rapidly manipulate and alter
+        memory to accelerate the creation of images in a frame buffer intended for output to a display device
+        
 * Android Programming:
     * What is “sandboxing” in Android OS?
     * Explain how permissions work in Android?
