@@ -213,7 +213,7 @@
     * What are Android Intents used for?  
         Intent is an abstract description of an operation to be preformed or event that has happened. You can use it for starting an activity, service, bind to service, or send data via broadcast receiver.
     * Describe implicit and explicit intents  
-        Explicit intents provide a component which they want to run
+        Explicit intents provide a component which they want to run  
         Implicit intents provide enough data to android to decide what is the most suitable component for the described task
     * How are implicit Intents resolved?  
         Android uses the data provided in the implicit intent and loops through the list of applications intent filters until it finds the one which accepts that implicit intent. Once it finds it, it calls onCreate of that activity and passes the intent to it
@@ -233,7 +233,7 @@
     * What is the MainLooper?  
         Looper keeps the thread alive in an infinite loop. MainLooper is the looper for the main (UI) thread
     * Describe the difference between match_parent and wrap_content  
-        setting width/height to match_parent on element, causes it to receive same width/height as its parent
+        setting width/height to match_parent on element, causes it to receive same width/height as its parent  
         setting the width/height to wrap_content on element, causes element to receive sam width/height as the total width/height of its children
     * How are views organised in Android  
         They are organized in a Tree structure
@@ -243,34 +243,58 @@
         We can create an interface which the activity holding the two fragments will implement. In the two fragments we can set the object (which implements that interface) in onAttach method. 
         The other method for fragment communication is by using view models. Two fragments observe the data from a common view model. 
     * Describe the best design practices in asking users for permissions in Android applications.  
-        \
-    * Name two different approaches to implementing concurrency in Android and briefly describe them (pick only two)
-    * What is IntentService and what is it used for?
-    * How do you handle results from IntentService?
+        Don't ask for permission unless you need them. Show emediate benefit of granting the permission. if the user denies a necessary permission educate them about why your app needs the permission and ask one more time.  
+    * Name two different approaches to implementing concurrency in Android and briefly describe them (pick only two)  
+        - Threads and handlers -> create a new HandlerThread which already contains task queue and a looper for the thread. Send tasks to it with a handler instance from your main thread and receive information 
+        - Kotlin coroutines -> it is a light abstraction over threads. You define a scope and choose an already existing thread on which your task will run on (Default, Main, IO). After that you use suspend functions inside of the scopes to run    operations in background
+    * What is IntentService and what is it used for?  
+        IntentService is a particular kind of service which is used to do long running one-off background
+        tasks and then quit. It works on a separate thread.
+    * How do you handle results from IntentService?  
+        You can write a broadcast receiver which will receive an intent once from the IntentService, once it completes the task.
     * What is the difference between IntentService and JobIntentService?
     * Describe the basics of AsyncTask
+        AsyncTask is used for
     * You are a chief architect of a mobile sensing app that is used to help telecoms get a better idea of the LTE network coverage. The app runs a network connectivity speed test and saves the result to the local database. When a user is connected on WiFi, the app uploads the data to the server.
     * - Explain how you would implement network connectivity speed testing so that it starts when a user clicks on a button, runs the test in the background, and then shows the result back to the user, when ready.
     * - Explain how you would implement upload on the server, so that it doesn’t conflict with the regular app use.
     * You are a chief architect of a mobile music player. The app should play music even when the user is not actively using your app, even when the user is not using the phone. Which class would you use for running the music player? Why?
     * Explain Threads and Handlers
     * Which of the following is true for Service class:
-        - Service by default runs on the main thread
-        - Calling an Intent in order to start a service, will, if the Service is already running, skip onCreate and just call onStart
-        - Service can be bound to another component through onBind call
-        - Service can be run in either background or foreground
+        - Service by default runs on the main thread True
+        - Calling an Intent in order to start a service, will, if the Service is already running, skip onCreate and just call onStart --> Maybe since there is OnStartCommand function but no onstart
+        - Service can be bound to another component through onBind call True
+        - Service can be run in either background or foreground True
     * What is a wake lock? Explain how to acquire it and release it.
-    * Describe the main functionalities of AlarmManager
-    * Why are tasks scheduled via WorkManager more energy efficient than tasks scheduled via AlarmManager?
-    * List and briefly describe different scales of mobile sensing applications
+    * Describe the main functionalities of AlarmManager  
+        The main functionality of alarma manager is running periodic or one-off tasks at nearly specific time or with specific times between operations.
+    * Why are tasks scheduled via WorkManager more energy efficient than tasks scheduled via AlarmManager?  
+        Because tasks scheduled with work manager do not have to be executed at exact time, that is why the WorkManager can group a lot of tasks and execute them at once. This method does not wake up the device as often.
+    * List and briefly describe different scales of mobile sensing applications  
+        - Individual/Personal focuses on individual, his behaviour
+        - Group sensing sensing common group activities
+        - Urban-scale large number of people have the same application, sensing large scale data
     * Describe one application in each of the listed scale categories
-    * Explain why background processing is important in mobile computing (in particular for mobile sensing)
-    * How would you design an application for detecting face-to-face conversation and frequency?
-    * How would you design an application for inferring sleep duration?
+        - Workout trackers
+        - Student applications 
+        - Covid tracking applications (OstaniZdrav)
+    * Explain why background processing is important in mobile computing (in particular for mobile sensing)  
+        Because it allows us to create much more complex and user friendly application. For example you wouldn't want to build a fitness tracker application from which you couldn't exit to change a song, because it will stop tracking you.
+        Furthermore it allows us to capture much more data, which we can use to infer higher level concepts more easily
+    * How would you design an application for detecting face-to-face conversation and frequency?  
+        First of all I would need to build a classifier which lets me know if the user is talking with somebody. For this I would use microphone data transformed with FFT to frequencies to feed my machine learning model. To get the correct labels needed for learning I would prompt users to let the app know once its talking to somebody by clicking on a button (once user starts and once he ends). Once the classification accuracy of the model is high enough I would enable the detection of face-to-face conversation  
+        In order to get readings from the microphone I would use AlarmManager to schedule a periodic task which would run every 2 minutes. The task would be created and registered (to AlarmManager) inside of a Foreground service in order to avoid my application being killed before the task has been registered. The task would also contain a pending intent which would be used in case a conversation has been detected. It would start an IntentService which would update the frequencie of conversations inside of the apps relational database.
+    * How would you design an application for inferring sleep duration?  
+        Firstly I would need to build a model to detect if user is sleeping. For this I would use microphone, light and location data. In order to train the model I would ask user to let me know when he goes to sleep and when he wakes up. Once the classification accuracy of the model is high enough I would enable sleep detection. For the data processing, I would get the mean and variance from microphone and light sensor. For location I would use Google play Location Service to get the users location.
+        For sensig I would register a task with AlarmManager in order to periodically get and process the data from the sensors. I would check if the user is sleeping every 20 minutes. The task would be registered inside of foreground service in order to avoid the issue of my application being closed by the user or by the OS. Every time User starts sleeping the task would use the pending intent to start an intent service which would create a new sleep record along with the starting time of the sleep in the apps relational database. Once the user exits from sleep, I would also use the pending intent to start an intent service which would set the duration and end time of the current sleeping session.  
+        The apps UI would be used to display the data from the relational database. 
     * How would you design a contact tracing app for epidemiology research? Ensure that the app is as much privacy-preserving as possible.
-    * Describe adaptive duty cycling,
-    * Explain what hierarchical sensor activation is.
+    * Describe adaptive duty cycling,  
+        Adaptive duty cycling allows device to sleep by sensing in a defined interval. Once it detects an event it will shorten that interval and if it does not detect anything it will lengthen the interval until it reaches some value. 
+    * Explain what hierarchical sensor activation is.  
+        In order to perserve power, the inaccurate but energy efficient sensors are activated first and if they detect the wanted event or data, other more accurate sensors will be turned on for accurate detection
     * Describe the process of inferring a smartphone user’s physical activity from sensor readings.
+    
     * Explain how InterruptMe project uses mobile sensing and machine learning or propose own approach towards inferring interruptibility of a mobile user
     * Give an example of an Android app designed with the MVC paradigm. Exaplain what "M", "V", and "C" are in this case.
     * What is the drawback of MVC in Android? What is the alternative?
