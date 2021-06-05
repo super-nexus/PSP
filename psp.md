@@ -3,12 +3,12 @@
     * List at least two platforms and describe the key properties of each
 
 * Web platform:
-    * Briefly describe the underlying technologies supporting the Web platform  
+    * **Briefly describe the underlying technologies supporting the Web platform**  
         HTML (hyper text mark up language) is a markup language for hyper text, which is a text that points to another resource 
         HTTP -> is a client-server communication protocol where client sends the request and server responds with response. It has multiple methods: GET, POST, PUT, DELETE...
         URL -> is a unified way of referencing resources on the web 
-    * What is Hypertext? Briefly describe its historical role in the Web.  
-        Hyper text is text that a points to another resource.
+    * **What is Hypertext? Briefly describe its historical role in the Web.**  
+        Hyper text is text that points to another resource.
         It got invented in the 1963 and by 1968 there were already exmaple usages of hyper text on local file storage systems. In 1989 Tim Berners Lee connected hyper text with url and http and with that created the www 
     * What is WWW? List its main components.  
         WWW is a service which runs on the internet. Main components already listed above
@@ -154,38 +154,96 @@
     * What is a GPU?  
         A graphics processing unit is a specialized electronic circuit designed to rapidly manipulate and alter
         memory to accelerate the creation of images in a frame buffer intended for output to a display device
-        
+
 * Android Programming:
-    * What is “sandboxing” in Android OS?
-    * Explain how permissions work in Android?
-    * Sketch and describe the Android compilation process.
-    * A few years ago Google engineers decided to replace Dalvink, a just-in-time compiler, with ART, an ahead-of-time compiler. Briefly describe the differences and present some reasons that support the engineers’ decision.
-    * What is the purpose of “res” folder in Android projects?
-    * How are non-compiled application resources accessed in Android programmes?
-    * Describe different means of storing data locally in Android applications
-    * What is the meaning of "?" and "!!" before accessing a property of an object in Kotlin?
-    * What is "smart cast" in Kotlin?
-    * What is a companion object in Kotlin?
-    * You are a chief architect of the next most popular app on the market - the app allows users to record videos of themselves singing and dancing over popular tunes. You have to think about data storage for different parts of the app. Decide which method to use to store the following (explain!)
-    * - Video files created by the app
-    * - Audio tracks used during the video generation
-    * - User settings
-    * What are SharedPreferences used for?
-    * Activity lifecycle - draw diagram and clearly mark when activity exists, is visible, in the foreground
-    * Activity lifecycle - why did engineers decide to implement that way
-    * How can we save an activity state and restore it when the activity is recreated?
+    * What is “sandboxing” in Android OS?  
+        Each app on Android is running in its own sandbox (container), which means its resources are protected from other potentially malicious applications.
+    * Explain how permissions work in Android?  
+        Normal permissions(flashlight, vibrate) are granted automatically by the os. Dangerous permissions on the other hand (location, contact list...) must be granted by the user. Since API 23 asking user for dangerous permission should be done right before the feature (which requires that permission) is about to be used
+    * Sketch and describe the Android compilation process.  
+        Firstly we compile the kotlin/java code into the java bytecode (.class). After that we can use proguard to get minimized bytecode, but it is not necessary. Once that is done we recompile the code into the .dex bytecode in order to save space and from there it is compiled to machine/native code which android devices use to run apps. 
+    * A few years ago Google engineers decided to replace Dalvink, a just-in-time compiler, with ART, an ahead-of-time compiler. Briefly describe the differences and present some reasons that support the engineers’ decision.  
+        The difference between the two is that ART uses ahead of time compiler, which compiles the applications during the installation and never again, meanwhile the Dalvik compiles the application when it needs it, so before launching the application.
+        The reason google has opted for ART is that the applications only get installed once so it worth trading longer install times for faster app load times. 
+    * What is the purpose of “res” folder in Android projects?  
+        It holds applications static resources such as layouts, strings, drawables, styles...
+    * How are non-compiled application resources accessed in Android programmes?  
+        They are accessed through the R object (for example R.layout.main_layout)
+    * Describe different means of storing data locally in Android applications  
+        - Shared preferences -> used for storing primitive data in key-value pairs. Nice for storing users preferences. It is deleted once the app is uninstalled
+        - Internal storage -> used for storing files to devices storage. This storage is always accessible only by your application and it gets deleted once the app gets uninstalled
+        - External storage -> used for storing files to device or external storage. This storage may not be always accessible and other applications can access it. It does not get deleted once the app is uninstalled
+        - Sql database -> its a relational database which gets deleted once your app is uninstalled 
+    * What is the meaning of "?" and "!!" before accessing a property of an object in Kotlin?  
+        The !! always returns the non-null value (we guarantee kotling that this value will not be null) and because of that it can throw a NullPointerException (if the value is null). 
+        The ? returns the value if its not null or null if value is null 
+        So the a!!.length would return a.length if a is not null and Null pointer exception otherwise.
+        a?.length would return a.length if a is not null and null otherwise
+    * What is "smart cast" in Kotlin?  
+        it is a feature in kotlin which allows us to use variables without safe cast inside of if statements where we checked that the value of the variable is not null
+        So something like this would be allowed
+        ```  
+            var foo: String? = "Hello"
+            if(foo != null){
+                print(foo.length)
+            }
+        ```
+        Meanwhile something like this will not be accepted
+        ```
+            var foo: String? = "Hello"
+            print(foo.length)
+            // this is correct print(foo?.length)
+        ```
+
+    * What is a companion object in Kotlin?  
+        companion object is an object whose variables are static i.e tied to the class and not the instance
+    * You are a chief architect of the next most popular app on the market - the app allows users to record videos of themselves singing and dancing over popular tunes. You have to think about data storage for different parts of the app. Decide which method to use to store the following (explain!)  
+        - Video files created by the app --> I would use external storage so the videos users create do not get deleted if they uninstall the app
+        - Audio tracks used during the video generation --> I would use internal storage as they are still files so they can't be saved to sql db or shared preferences. But I would want them to be deleted once the app is uninstalled 
+        - User settings --> I would use shared preferences since they are easy to read and write from and android can generate activitys which display and allow users to edit their preferences
+    * What are SharedPreferences used for?  
+        They are used for storing primitive data types in key-value pairs. Ussually for storing user preferences (such as theme of the app, remember login ....)
+    * Activity lifecycle - draw diagram and clearly mark when activity exists, is visible, in the foreground  
+        On the slides
+    * Activity lifecycle - why did engineers decide to implement that way  
+        Because users interact with the activitys and developers need to know in which state an activity is in order to do specific functions. Furthermore android OS can also kill your activities to optimize battery life and certain actions should be taken before that (saving state and users unsaved data, killing cpu intensive processes). That is why the lifecycle of activities exist  
+    * How can we save an activity state and restore it when the activity is recreated?  
+        We can save the activity state into a bundle in OnSaveInstanceState and later receive that bundle in OnRestoreInstanceState
     * Assume that each of the lifecycle callbacks (onCreate, onStart, etc.) print an associated log message with the callback and the activity name when called (e.g. “onCreate from Activity 1”, “onStart from Activity 1”, etc.). Write one after another all the log messages that will be printed at the end of the example shown in the figure: https://bit.ly/2Ei4X29
-    * What are Android Intents used for?
-    * Describe implicit and explicit intents
-    * How are implicit Intents resolved?
-    * Where can IntentFilters be specified?
-    * Sketch code that calls a function doSomething() when a user clicks on a button in an Activity.
-    * What is the MainLooper?
-    * Describe the difference between match_parent and wrap_content
-    * How are views organised in Android
-    * Discuss the difference between Fragments and Activities
-    * How can we share information among different fragments of the same app (connected to the same Activity).
-    * Describe the best design practices in asking users for permissions in Android applications.
+    * What are Android Intents used for?  
+        Intent is an abstract description of an operation to be preformed or event that has happened. You can use it for starting an activity, service, bind to service, or send data via broadcast receiver.
+    * Describe implicit and explicit intents  
+        Explicit intents provide a component which they want to run
+        Implicit intents provide enough data to android to decide what is the most suitable component for the described task
+    * How are implicit Intents resolved?  
+        Android uses the data provided in the implicit intent and loops through the list of applications intent filters until it finds the one which accepts that implicit intent. Once it finds it, it calls onCreate of that activity and passes the intent to it
+    * Where can IntentFilters be specified?  
+        They can be specified statically in Android manifest file or dynamically during the app runtime (With kotlin or java)
+    * Sketch code that calls a function doSomething() when a user clicks on a button in an Activity.  
+        ```
+    	    public fun onCreate(savedInstanceState: Bundle?){
+                .
+                .
+                .
+                var button = binding.myButton
+                button.setOnClickListener(){ doSomething() }
+            }
+        ```
+
+    * What is the MainLooper?  
+        Looper keeps the thread alive in an infinite loop. MainLooper is the looper for the main (UI) thread
+    * Describe the difference between match_parent and wrap_content  
+        setting width/height to match_parent on element, causes it to receive same width/height as its parent
+        setting the width/height to wrap_content on element, causes element to receive sam width/height as the total width/height of its children
+    * How are views organised in Android  
+        They are organized in a Tree structure
+    * Discuss the difference between Fragments and Activities  
+        Fragments need activities in order to run. They attach to an activity and can be reused. There can also be multiple fragments in a single activity, but they can't talk to eachother directly.
+    * How can we share information among different fragments of the same app (connected to the same Activity).  
+        We can create an interface which the activity holding the two fragments will implement. In the two fragments we can set the object (which implements that interface) in onAttach method. 
+        The other method for fragment communication is by using view models. Two fragments observe the data from a common view model. 
+    * Describe the best design practices in asking users for permissions in Android applications.  
+        \
     * Name two different approaches to implementing concurrency in Android and briefly describe them (pick only two)
     * What is IntentService and what is it used for?
     * How do you handle results from IntentService?
