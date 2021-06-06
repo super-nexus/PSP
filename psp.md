@@ -4,7 +4,7 @@
 
 * Web platform:
     * **Briefly describe the underlying technologies supporting the Web platform**  
-        HTML (hyper text mark up language) is a markup language for hyper text, which is a text that points to another resource 
+        HTML (hyper text mark up language) is a markup language for hyper text, which is a text that can hold a reference to another resource 
         HTTP -> is a client-server communication protocol where client sends the request and server responds with response. It has multiple methods: GET, POST, PUT, DELETE...
         URL -> is a unified way of referencing resources on the web 
     * **What is Hypertext? Briefly describe its historical role in the Web.**  
@@ -24,13 +24,15 @@
         Buisness layer -> it processes requests, fetches the data and with that connects the data and presentation layer
         Data layer -> deals with storing and the structure of the data. 
     * In his 1996 article, Tim Berners Lee expresses a concern that the Web looks like a lot of television channels. Explain what he means by this? In your opinion, is the Internet today still “a lot of television channels”? Defend your argument.  
-        He meant by this that every page stated that it works best with certain version of a certain browser. I don't think this is the case today since all of the browsers follow the standards posted by W3C and most of the world uses a chromium based browser anyway. There are of course small discrepencies between different browsers but they are not noticeable for the average user, since they are mostly found in nitche applications
+       He said this because only the big corporations could afford and had knowledge to build (web pages) and advertise their products on the web. Today it's drastically better, since almost everyone can build their own webpage using already built templates or learning from many accessible free courses on the web. But not everything is perfect since some of the webs most used services, such as search engines and social networks are owned by a handful of big companies (Google, Facebook, Amazon....)
     * Changing URLs were a problem in the early Web. How is it solved nowadays?  
         It is solved with redirects. Http 301 states that resource has been permanently moved to another location, thus the redirect happens
     * What are content-delivery networks? How do they help with the network load?  
+        Content delivery networks are highly distributed platform of servers which helps with minimizing loading content from the internet, by being physically closer to the end user.
     * Explain how AJAX web pages work.  
         AJAX webpages are webpages which make AJAX requests, i.e they send asynchrounus requests to the server. This is why they are more interactive since the webpage does not need to be reloaded everytime a user interacts with the page 
-    * What is Information-centric networking?
+    * What is Information-centric networking?  
+        Its approch very good, much helps with serach of data.yes
     * What is REST? List its main rules?  
         Rest (Representational state transfer) is a software architecture style used for writing web services
         Rules:  
@@ -60,12 +62,13 @@
         - it wasn't optimized for capacitive touchscreens
         - it didn't have an appstore 
         - bad developing experience (for developers)
+        - ugly application designs
     * What is Android? (max 3 sentences)  
         Android is an open source, Linux based, mobile operating system from Google. 
     * What are the key affordances of the mobile platform?  
         - lot of user interactions
         - personalized devices 
-
+        - they bring context awarness through sensing and ML
     * What are the main constraints of the mobile platform?  
         - limited energy
         - limited processing power, limited resources are shared among apps, and background processing is limited in order preserve energy
@@ -99,11 +102,19 @@
         System which processes the events/requests in real time, there is no buffer delay.
     * What is an interrupt routine in embedded programming?  
         It is a process of switching current running process with the interrupt program and than returning back the process (which was previously running) along with its context
-    * What are the main constraints of embedded networked systems discussed in Estrin et al. article?
+    * What are the main constraints of embedded networked systems discussed in Estrin et al. article?  
+        - they are energy constrained as some of them may not be able to connect to constant power supply
+        - they aren't easily upgradable once they are deployed
+        - they are usually cheap because large quantities of them must be deployed
+        - because of low amount resources available, security is also an issue
     * A vehicle often contains (at least two) independent embedded systems. Why?  
         They tend to have embedded systems for safety critical systems such as ABS breaking. They need to work 100% of the time and they need to respond ASAP. That is why they are seperatly developed and put in a car. On the other hand we have systems which deal with non safety critical functions such as operating radio from the stearing wheel buttons, this systems should not influence the safety critical ones, that is why they are seperated. 
-    * What are the main threats for embedded systems’ wireless communication? Hint: Estrin et al. paper.
-    * Why, even more so than with conventional desktop systems, we must ensure that embedded networked systems are correctly programmed?
+    * What are the main threats for embedded systems’ wireless communication? Hint: Estrin et al. paper.  
+        - communication can be intercepted if not properly encrypted
+        - wireless communication is not always available or it stops working completely
+        - someone can manipulate the data wich may cause the malfunction in the system 
+    * Why, even more so than with conventional desktop systems, we must ensure that embedded networked systems are correctly programmed?  
+        Because once deployed they are hardly upgradeable and because they can be safety critical systems.
     * “Failures we have in today’s technologies could be disastrous in embedded networked systems” warn Estrin et al. in 2001. Argue for or against this statement.
     * Discuss a potential use of embedded systems in precision agriculture.
     * Present at least one means of saving energy in an embedded system that senses the humiditiy in the field and notifies about potential floods.  
@@ -128,7 +139,8 @@
         It is a process of compiling a program for different system architecture than the one you are compiling on (cross-compiling code for Arduino)
     * What is a toolchain?  
         It is a set of tools required to perform certain software development task
-    * What are the main differences between an embedded operting system and a conventional (desktop) operating system?
+    * What are the main differences between an embedded operting system and a conventional (desktop) operating system?  
+        Embedded systems ussually do not have OS-es, if they do they tend to not have UI and they are made to use as low amount of resources as possible
     * What is a process? What are the process states? Draw a state transition diagram.  
         Process is an abstraction encapsulating set of processing tasks:  
         - Instructions
@@ -213,7 +225,7 @@
     * What are Android Intents used for?  
         Intent is an abstract description of an operation to be preformed or event that has happened. You can use it for starting an activity, service, bind to service, or send data via broadcast receiver.
     * Describe implicit and explicit intents  
-        Explicit intents provide a component which they want to run  
+        Explicit intents provide a component which should be started
         Implicit intents provide enough data to android to decide what is the most suitable component for the described task
     * How are implicit Intents resolved?  
         Android uses the data provided in the implicit intent and loops through the list of applications intent filters until it finds the one which accepts that implicit intent. Once it finds it, it calls onCreate of that activity and passes the intent to it
@@ -265,7 +277,9 @@
         - Calling an Intent in order to start a service, will, if the Service is already running, skip onCreate and just call onStart --> Maybe since there is OnStartCommand function but no onstart
         - Service can be bound to another component through onBind call True
         - Service can be run in either background or foreground True
-    * What is a wake lock? Explain how to acquire it and release it.
+    * What is a wake lock? Explain how to acquire it and release it.  
+        Wake lock is a functionality which prevents the phone form going to low-power mode.  
+        To acquire it you need special WAKE_LOCK permission. To use it in application use power manager to obtain it and acquire it. To release use .release() function.
     * Describe the main functionalities of AlarmManager  
         The main functionality of alarma manager is running periodic or one-off tasks at nearly specific time or with specific times between operations.
     * Why are tasks scheduled via WorkManager more energy efficient than tasks scheduled via AlarmManager?  
@@ -288,9 +302,10 @@
         Firstly I would need to build a model to detect if user is sleeping. For this I would use microphone, light and location data. In order to train the model I would ask user to let me know when he goes to sleep and when he wakes up. Once the classification accuracy of the model is high enough I would enable sleep detection. For the data processing, I would get the mean and variance from microphone and light sensor. For location I would use Google play Location Service to get the users location.
         For sensig I would register a task with AlarmManager in order to periodically get and process the data from the sensors. I would check if the user is sleeping every 20 minutes. The task would be registered inside of foreground service in order to avoid the issue of my application being closed by the user or by the OS. Every time User starts sleeping the task would use the pending intent to start an intent service which would create a new sleep record along with the starting time of the sleep in the apps relational database. Once the user exits from sleep, I would also use the pending intent to start an intent service which would set the duration and end time of the current sleeping session.  
         The apps UI would be used to display the data from the relational database. 
-    * How would you design a contact tracing app for epidemiology research? Ensure that the app is as much privacy-preserving as possible.
+    * How would you design a contact tracing app for epidemiology research? Ensure that the app is as much privacy-preserving as possible.  
+
     * Describe adaptive duty cycling,  
-        Adaptive duty cycling allows device to sleep by sensing in a defined interval. Once it detects an event it will shorten that interval and once it stops detecting events it will longer the interval until it reaches the original value. 
+        Adaptive duty cycling allows device to sleep by sensing in a defined interval. Once it detects an event it will shorten that interval and once it stops detecting events it will lengthen the interval until it reaches the original value. This is done because events are ussually grouped together (for example you do not take a single step).
     * Explain what hierarchical sensor activation is.  
         In order to perserve power, the inaccurate but energy efficient sensors are activated first and if they detect the wanted event or data, other more accurate sensors will be turned on for accurate detection
     * Describe the process of inferring a smartphone user’s physical activity from sensor readings.  
