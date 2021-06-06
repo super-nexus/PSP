@@ -290,20 +290,31 @@
         The apps UI would be used to display the data from the relational database. 
     * How would you design a contact tracing app for epidemiology research? Ensure that the app is as much privacy-preserving as possible.
     * Describe adaptive duty cycling,  
-        Adaptive duty cycling allows device to sleep by sensing in a defined interval. Once it detects an event it will shorten that interval and if it does not detect anything it will lengthen the interval until it reaches some value. 
+        Adaptive duty cycling allows device to sleep by sensing in a defined interval. Once it detects an event it will shorten that interval and once it stops detecting events it will longer the interval until it reaches the original value. 
     * Explain what hierarchical sensor activation is.  
         In order to perserve power, the inaccurate but energy efficient sensors are activated first and if they detect the wanted event or data, other more accurate sensors will be turned on for accurate detection
-    * Describe the process of inferring a smartphone user’s physical activity from sensor readings.
-    
+    * Describe the process of inferring a smartphone user’s physical activity from sensor readings.  
+        To infer physical activity we need to train a machine learning model to recognize the type of the activity. So firstly we'll ask the user to repeat a move continuously and then prompt him to write the name of that move. During execution of the move we will use the  mean, variance and mean crossing rate from gyroscope and accelorometer. Every second we would calculate those parameters and use them for training the classifier. Once the classifier is trained we can infer phyisical activities. I cannot state which ML model is best for the job but we can use random forests for example.
     * Explain how InterruptMe project uses mobile sensing and machine learning or propose own approach towards inferring interruptibility of a mobile user
     * Give an example of an Android app designed with the MVC paradigm. Exaplain what "M", "V", and "C" are in this case.
     * What is the drawback of MVC in Android? What is the alternative?
+        The drawback of this model is that view and controller are tightly connected and often when updating one of them, we need to update the other as well. The alternative would be to use MVVM, which stands for Model-View-ViewModel.
     * Describe the components you would use in an app where the data are not stored in persistent storage (e.g. database, SharedPreferences), but they have to survive configuration changes (phone rotation).
+        I would either use a ViewModel which survives the lifecycle changes of the activity or store the data in a bundle in OnSaveInstanceState function.
     * What is LiveData? Describe a use case for LiveData in an Android app.
+        LiveData is an object which wraps some data and allows it to be observed. What is more it is also lifecycle aware so it will only notify the observer when needed.  
     * Draw a diagram and describe the data flow of a modern Android app using a Room database.
-    * What is the purpose of Object-Relational Mapping?
-    * Pick two wireless technologies supported by modern smartphones and discuss their range, power requirements, throughput, and list at least one application where each of the technologies might be used.
-    * What are the benefits of OkHttp versus HttpUrlConnect method for accessing remote APIs?
-    * You are designing an app that helps a user find a place to park a car. How would you communicate the data about the spot vacancy from the server to your app in the most efficient way?
+    * What is the purpose of Object-Relational Mapping?  
+        It converts table entries to Kotlin/Java objects and vice versa. It makes development of applications much easier since it allows programmers to interact with database through objects and not queries.
+    * Pick two wireless technologies supported by modern smartphones and discuss their range, power requirements, throughput, and list at least one application where each of the technologies might be used.  
+        - NFC --> very short range, very low power consumption, very low throughput. It is used for contactless payment
+        - Wifi --> medium range, medium power consumption, high throughput. Used by almost all applications which connect to the internet (example. Twitch and streaming services, since they require high throughput for good video quality)
+    * What are the benefits of OkHttp versus HttpUrlConnect method for accessing remote APIs?  
+        It compresses the data, it will automatically retry if the connection has failed, it takes less code to do the same thing. 
+    * You are designing an app that helps a user find a place to park a car. How would you communicate the data about the spot vacancy from the server to your app in the most efficient way?  
+        I would use firebase messaging. So I would probably have a system which will post to a ceratin topic on Firebase when a spot is available. Android app will subscribe to that topic (with firebase library), it will get notified and from there I can create a JobIntentService which will create a notification for the user
     * List the benefits of hybrid application development.
-    * What is the purpose of plugins in Apache Cordova?
+        You need to maintain a single code base, you do not need to have seperate teams developing for seperate platforms. This reducec the cost of development aswell as speeds up the whole development cycle for application development
+    * What is the purpose of plugins in Apache Cordova?  
+        Their purpose is to enable access to devices native capabilities
+
